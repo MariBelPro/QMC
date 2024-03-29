@@ -1,0 +1,10 @@
+function [a]=neib(i,I)
+if I-i<=I || I-i>=0
+    a=i
+end
+if i>I
+a=i-I
+end
+if i<1
+    a=I-i
+end

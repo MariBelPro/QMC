@@ -1,0 +1,43 @@
+function [z] =coord_general(m,M,i,I)
+% i odd number
+z=zeros(1,2)
+if mod(m,2)==0 
+for k=-2:1:1
+    [a]=neib(k+i,I)
+    [b]=neib(m+1,M)
+    psi1=[a,m]
+     psi2=[a,b]
+    z=[z;psi1]
+    z=[z;psi2]
+end
+for k=-1:1:0
+    [a]=neib(k+i,I)
+    [b]=neib(m-1,M)
+    [c]=neib(m+2,M)
+    psi1=[a,b]
+     psi2=[a,c]
+    z=[z;psi1]
+    z=[z;psi2]
+end
+end
+if mod(m,2)==1 
+for k=-1:1:2
+    [a]=neib(k+i,I)
+    [b]=neib(m+1,M)
+    psi1=[a,m]
+    psi2=[a,b]
+    z=[z;psi1]
+    z=[z;psi2]
+end
+for k=0:1:1
+     [a]=neib(k+i,I)
+    [b]=neib(m-1,M)
+    [c]=neib(m+2,M)
+    psi1=[a,b]
+     psi2=[a,c]
+    z=[z;psi1]
+    z=[z;psi2]
+end
+z(1,:)=[]
+end
+

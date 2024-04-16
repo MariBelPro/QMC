@@ -1,0 +1,36 @@
+function  [w]=find_w_old(psi,psi1)
+m=2
+n_max=2
+S= (n_max+1)^m %amount of combination
+[A]= b11(m,n_max)
+k_psi=0
+k_psi1=0
+for k=1:1:S
+phi=psi-A(k,:)
+if sum(phi.*phi)==0
+k_psi=k
+end
+end
+[R] =  all_spin_neibors(A)
+t=1
+U=4
+mu=0
+V=3
+H=zeros(S,S)
+for i=1:S
+    psi1=R(i,1:m)
+     psi2=R(i,2:m+1)
+    H(i,i)=U*sum(psi1.*psi1)-mu*(sum(psi1))+V*sum(psi1.*psi2) % colculate diagonal elements
+    for j=1:m % for not diaganal element
+       [c1,k1,c2,k2] = a_p_a_m(A,psi1,j,n_max)
+        %colculate  not diagonal elements (i,k)
+       H(i,k1)=H(i,k1)-t*c1 
+       H(i,k2)=H(i,k2)-t*c2
+       
+    end 
+end 
+% N particles in alpha state
+[V,E]=eig(H);
+H=H/2
+expm(-0.25*H)
+H*expm(-0.25*H)

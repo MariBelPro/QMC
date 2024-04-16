@@ -1,6 +1,7 @@
-function [z] =coord_general(t,T,m,M,A)
-% i odd number
+function [z] =find_probability_old(t,T,m,M,A)
+% t odd number
 z=zeros(1,2)
+if mod(t,2)==0
 //North
  [a1_l]=neib(m-1,M)
  [b1_l]=neib(t-2,T)
@@ -14,6 +15,7 @@ psi(2)=A(b1_r, a1_r)
  [b2_r]=neib(t-1,T)
 psi1(1)=A(b2_l, a2_l)
 psi1(2)=A(b2_r, a2_r)
+find_w_old(psi,psi1)
 //East
  [a1_l]=neib(m-2,M)
  [b1_l]=neib(t-1,T)
@@ -28,7 +30,7 @@ psi(2)=A(b1_r, a1_r)
  [b2_r]=neib(t,T)
 psi1(1)=A(b2_l, a2_l)
 psi1(2)=A(b2_r, a2_r)
-
+find_w_old(psi,psi1)
 //West
  [a1_l]=neib(m,M)
  [b1_l]=neib(t-1,T)
@@ -43,6 +45,7 @@ psi(2)=A(b1_r, a1_r)
  [b2_r]=neib(t,T)
 psi1(1)=A(b2_l, a2_l)
 psi1(2)=A(b2_r, a2_r)
+find_w_old(psi,psi1)
 /South
  [a1_l]=neib(m-1,M)
  [b1_l]=neib(t,T)
@@ -57,7 +60,9 @@ psi(2)=A(b1_r, a1_r)
  [b2_r]=neib(t+1,T)
 psi1(1)=A(b2_l, a2_l)
 psi1(2)=A(b2_r, a2_r)
-
+find_w_old(psi,psi1)
+end
+// i odd nomber
 if mod(t,2)==1 
 //North
  [a1_l]=neib(m,M)
@@ -73,6 +78,7 @@ psi(2)=A(b1_r, a1_r)
  [b2_r]=neib(t-1,T)
 psi1(1)=A(b2_l, a2_l)
 psi1(2)=A(b2_r, a2_r)
+find_w_old(psi,psi1)
 //East
  [a1_l]=neib(m-1,M)
  [b1_l]=neib(t-1,T)
@@ -87,6 +93,7 @@ psi(2)=A(b1_r, a1_r)
  [b2_r]=neib(t,T)
 psi1(1)=A(b2_l, a2_l)
 psi1(2)=A(b2_r, a2_r)
+find_w_old(psi,psi1)
 //West
  [a1_l]=neib(m+1,M)
  [b1_l]=neib(t-1,T)
@@ -101,6 +108,7 @@ psi(2)=A(b1_r, a1_r)
  [b2_r]=neib(t,T)
 psi1(1)=A(b2_l, a2_l)
 psi1(2)=A(b2_r, a2_r)
+find_w_old(psi,psi1)
 /South
  [a1_l]=neib(m,M)
  [b1_l]=neib(t,T)
@@ -115,6 +123,7 @@ psi(2)=A(b1_r, a1_r)
  [b2_r]=neib(t+1,T)
 psi1(1)=A(b2_l, a2_l)
 psi1(2)=A(b2_r, a2_r)
+find_w_old(psi,psi1)
 end
 end
 

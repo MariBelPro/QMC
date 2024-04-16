@@ -1,43 +1,120 @@
-function [z] =coord_general(m,M,i,I)
+function [z] =coord_general(t,T,m,M,A)
 % i odd number
 z=zeros(1,2)
-if mod(m,2)==0 
-for k=-2:1:1
-    [a]=neib(k+i,I)
-    [b]=neib(m+1,M)
-    psi1=[a,m]
-     psi2=[a,b]
-    z=[z;psi1]
-    z=[z;psi2]
+//North
+ [a1_l]=neib(m-1,M)
+ [b1_l]=neib(t-2,T)
+[a1_r]=neib(m,M)
+ [b1_r]=neib(t-2,T)
+psi(1)=A(b1_l, a1_l)
+psi(2)=A(b1_r, a1_r)
+[a2_l]=neib(m-1,M)
+ [b2_l]=neib(t-1,T)
+[a2_r]=neib(m,M)
+ [b2_r]=neib(t-1,T)
+psi1(1)=A(b2_l, a2_l)
+psi1(2)=A(b2_r, a2_r)
+//East
+ [a1_l]=neib(m-2,M)
+ [b1_l]=neib(t-1,T)
+[a1_r]=neib(m-1,M)
+ [b1_r]=neib(t-1,T)
+psi(1)=A(b1_l, a1_l)
+psi(2)=A(b1_r, a1_r)
+
+[a2_l]=neib(m-2,M)
+ [b2_l]=neib(t,T)
+[a2_r]=neib(m-1,M)
+ [b2_r]=neib(t,T)
+psi1(1)=A(b2_l, a2_l)
+psi1(2)=A(b2_r, a2_r)
+
+//West
+ [a1_l]=neib(m,M)
+ [b1_l]=neib(t-1,T)
+[a1_r]=neib(m+1,M)
+ [b1_r]=neib(t-1,T)
+psi(1)=A(b1_l, a1_l)
+psi(2)=A(b1_r, a1_r)
+
+[a2_l]=neib(m,M)
+ [b2_l]=neib(t,T)
+[a2_r]=neib(m+1,M)
+ [b2_r]=neib(t,T)
+psi1(1)=A(b2_l, a2_l)
+psi1(2)=A(b2_r, a2_r)
+/South
+ [a1_l]=neib(m-1,M)
+ [b1_l]=neib(t,T)
+[a1_r]=neib(m,M)
+ [b1_r]=neib(t,T)
+psi(1)=A(b1_l, a1_l)
+psi(2)=A(b1_r, a1_r)
+
+[a2_l]=neib(m-1,M)
+ [b2_l]=neib(t+1,T)
+[a2_r]=neib(m,M)
+ [b2_r]=neib(t+1,T)
+psi1(1)=A(b2_l, a2_l)
+psi1(2)=A(b2_r, a2_r)
+
+if mod(t,2)==1 
+//North
+ [a1_l]=neib(m,M)
+ [b1_l]=neib(t-2,T)
+[a1_r]=neib(m+1,M)
+ [b1_r]=neib(t-2,T)
+psi(1)=A(b1_l, a1_l)
+psi(2)=A(b1_r, a1_r)
+
+[a2_l]=neib(m,M)
+ [b2_l]=neib(t-1,T)
+[a2_r]=neib(m+1,M)
+ [b2_r]=neib(t-1,T)
+psi1(1)=A(b2_l, a2_l)
+psi1(2)=A(b2_r, a2_r)
+//East
+ [a1_l]=neib(m-1,M)
+ [b1_l]=neib(t-1,T)
+[a1_r]=neib(m,M)
+ [b1_r]=neib(t-1,T)
+psi(1)=A(b1_l, a1_l)
+psi(2)=A(b1_r, a1_r)
+
+[a2_l]=neib(m-1,M)
+ [b2_l]=neib(t,T)
+[a2_r]=neib(m,M)
+ [b2_r]=neib(t,T)
+psi1(1)=A(b2_l, a2_l)
+psi1(2)=A(b2_r, a2_r)
+//West
+ [a1_l]=neib(m+1,M)
+ [b1_l]=neib(t-1,T)
+[a1_r]=neib(m+2,M)
+ [b1_r]=neib(t-1,T)
+psi(1)=A(b1_l, a1_l)
+psi(2)=A(b1_r, a1_r)
+
+[a2_l]=neib(m+1,M)
+ [b2_l]=neib(t,T)
+[a2_r]=neib(m+2,M)
+ [b2_r]=neib(t,T)
+psi1(1)=A(b2_l, a2_l)
+psi1(2)=A(b2_r, a2_r)
+/South
+ [a1_l]=neib(m,M)
+ [b1_l]=neib(t,T)
+[a1_r]=neib(m+1,M)
+ [b1_r]=neib(t,T)
+psi(1)=A(b1_l, a1_l)
+psi(2)=A(b1_r, a1_r)
+
+[a2_l]=neib(m,M)
+ [b2_l]=neib(t+1,T)
+[a2_r]=neib(m+1,M)
+ [b2_r]=neib(t+1,T)
+psi1(1)=A(b2_l, a2_l)
+psi1(2)=A(b2_r, a2_r)
 end
-for k=-1:1:0
-    [a]=neib(k+i,I)
-    [b]=neib(m-1,M)
-    [c]=neib(m+2,M)
-    psi1=[a,b]
-     psi2=[a,c]
-    z=[z;psi1]
-    z=[z;psi2]
-end
-end
-if mod(m,2)==1 
-for k=-1:1:2
-    [a]=neib(k+i,I)
-    [b]=neib(m+1,M)
-    psi1=[a,m]
-    psi2=[a,b]
-    z=[z;psi1]
-    z=[z;psi2]
-end
-for k=0:1:1
-     [a]=neib(k+i,I)
-    [b]=neib(m-1,M)
-    [c]=neib(m+2,M)
-    psi1=[a,b]
-     psi2=[a,c]
-    z=[z;psi1]
-    z=[z;psi2]
-end
-z(1,:)=[]
 end
 
